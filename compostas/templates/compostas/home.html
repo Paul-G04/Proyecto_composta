@@ -1,0 +1,191 @@
+
+{% extends 'compostas/base.html' %}
+
+{% block title %}Inicio - PAEC Compostas{% endblock %}
+
+{% block content %}
+
+<!-- PORTADA -->
+
+<section class="hero text-center mb-5">
+
+    <h1 class="display-4 fw-bold">
+        Aprende sobre las compostas 🌱
+    </h1>
+
+    <p class="lead mt-3">
+        Transforma tus residuos orgánicos en nutrientes
+        para la tierra y ayuda a cuidar nuestro planeta.
+    </p>
+
+    <a href="#articulos"
+       class="btn btn-success btn-lg mt-3">
+        Explorar información
+    </a>
+
+</section>
+
+<!-- INFORMACION GENERAL -->
+
+<section class="mb-5">
+
+    <h2 class="text-center fw-bold mb-4">
+        ¿Qué es una composta?
+    </h2>
+
+    <div class="card shadow-sm p-4">
+
+        <p>
+            La composta es un abono natural que se obtiene
+            mediante la descomposición de residuos orgánicos
+            como cáscaras de frutas, verduras, hojas secas
+            y otros materiales biodegradables.
+        </p>
+
+        <p class="mb-0">
+            Este proceso permite aprovechar los residuos,
+            mejorar la calidad del suelo y proporcionar
+            nutrientes para el crecimiento de las plantas.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- BENEFICIOS -->
+
+<section class="mb-5">
+
+    <h2 class="text-center fw-bold mb-4">
+        Beneficios de la composta
+    </h2>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 p-3 text-center">
+
+                <h1>♻️</h1>
+
+                <h5>Reduce residuos</h5>
+
+                <p>
+                    Aprovecha los desechos orgánicos
+                    y disminuye la basura.
+                </p>
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 p-3 text-center">
+
+                <h1>🌱</h1>
+
+                <h5>Mejora el suelo</h5>
+
+                <p>
+                    Aporta materia orgánica y nutrientes
+                    para las plantas.
+                </p>
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 p-3 text-center">
+
+                <h1>🌎</h1>
+
+                <h5>Cuida el planeta</h5>
+
+                <p>
+                    Promueve hábitos responsables
+                    con el medio ambiente.
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ARTICULOS -->
+
+<section id="articulos" class="mb-5">
+
+    <h2 class="text-center fw-bold mb-4">
+        Aprende más sobre las compostas
+    </h2>
+
+    <div class="row g-4">
+
+        {% for article in articles %}
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="card shadow-sm h-100">
+
+                    {% if article.image_url %}
+
+                        <img src="{{ article.image_url }}"
+                             class="card-img-top"
+                             alt="{{ article.title }}"
+                             style="height: 200px; object-fit: cover;">
+
+                    {% endif %}
+
+                    <div class="card-body">
+
+                        <h5 class="card-title fw-bold">
+                            {{ article.title }}
+                        </h5>
+
+                        <p class="card-text">
+                            {{ article.description|truncatechars:150 }}
+                        </p>
+
+                        <div class="mb-3">
+
+                            {% for category in article.categories.all %}
+
+                                <span class="badge text-bg-success">
+                                    {{ category.name }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+                        <small class="text-muted">
+                            Publicado por: {{ article.owner.username }}
+                        </small>
+
+                    </div>
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="col-12">
+
+                <div class="alert alert-success text-center">
+
+                    Todavía no hay artículos publicados.
+
+                    El administrador puede agregar información
+                    desde el panel de Django.
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

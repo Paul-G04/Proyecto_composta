@@ -1,0 +1,77 @@
+
+{% extends 'compostas/base.html' %}
+
+{% block title %}Iniciar sesión - PAEC{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center my-5">
+
+    <div class="col-md-6 col-lg-5">
+
+        <div class="card shadow p-4">
+
+            <h2 class="text-center fw-bold mb-4">
+                Iniciar sesión
+            </h2>
+
+            <p class="text-center text-muted">
+                Accede a tu cuenta de PAEC Compostas.
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Nombre de usuario
+                    </label>
+
+                    <input type="text"
+                           name="username"
+                           class="form-control"
+                           placeholder="Ingresa tu usuario"
+                           required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Contraseña
+                    </label>
+
+                    <input type="password"
+                           name="password"
+                           class="form-control"
+                           placeholder="Ingresa tu contraseña"
+                           required>
+
+                </div>
+
+                <button type="submit"
+                        class="btn btn-success w-100">
+                    Iniciar sesión
+                </button>
+
+            </form>
+
+            <p class="text-center mt-4 mb-0">
+
+                ¿No tienes una cuenta?
+
+                <a href="{% url 'register' %}">
+                    Regístrate aquí
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
